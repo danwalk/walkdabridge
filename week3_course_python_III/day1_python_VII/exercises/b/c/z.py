@@ -1,18 +1,22 @@
-import sys
-classpath = 'C:\\Users\\Daniel\\Desktop\\The Bridge\\walkdabridge\\week3_course_python_III'
-sys.path.append(classpath)
+import sys, os
 
-from day1_python_VII.exercises.a.x import f2x
-from day1_python_VII.exercises.b.y import f1y
+path = __file__
+for i in range(3):
+    path = os.path.dirname(path)
+sys.path.append(path)
+print("Ruta z.py: -->", path)
+
+import a.x as t
+import b.y as q
 
 varz1 = "zone"
 varz2 = "ztwo"
 
 def f1z():
     print("f1z")
-    f1y()
+    q.f1y()
 
 def f2z():
     print("f2z")
-    f2x()
+    t.f2x()
 

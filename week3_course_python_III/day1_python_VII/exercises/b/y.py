@@ -1,16 +1,21 @@
-import sys
-classpath = 'C:\\Users\\Daniel\\Desktop\\The Bridge\\walkdabridge\\week3_course_python_III'
-sys.path.append(classpath)
+import sys, os
 
-from day1_python_VII.exercises.a.x import f1x, f2x
+path = __file__
+for i in range(2):
+    path = os.path.dirname(path)
+sys.path.append(path)
+print("Ruta y.py: -->", path)
+
+import a.x as x
 
 vary1 = "yone"
 vary2 = "ytwo"
 
 def f1y():
     print("f1y")
-    f1x()
+    x.f1x()
 
 def f2y():
     print("f2y")
-    f2x()
+    x.f2x()
+

@@ -1,8 +1,12 @@
-import sys
-classpath = 'C:\\Users\\Daniel\\Desktop\\The Bridge\\walkdabridge\\week3_course_python_III'
-sys.path.append(classpath)
+import sys, os
 
-from day1_python_VII.exercises.b.c.z import f2z
+path = __file__
+for i in range(2):
+    path = os.path.dirname(path)
+sys.path.append(path)
+print("Ruta x.py: -->", path)
+
+import b.c.z as z
 
 varx1 = "xone"
 varx2 = "xtwo"
@@ -12,4 +16,6 @@ def f1x():
 
 def f2x():
     print("f2x")
-    f2z()
+    z.f2z()
+
+f2x()

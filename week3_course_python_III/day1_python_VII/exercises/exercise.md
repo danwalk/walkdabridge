@@ -10,26 +10,14 @@ Una vez las tengas todas añade la siguiente funcionalidad a cada una de las fun
 
 ¿ Ha dado algún error?
 
-en archivo z - ModuleNotFoundError: No module named 'x'
-PS C:\Users\Daniel\Desktop\The Bridge\walkdabridge>
-
-RESUELTO EN ARCHIVO Z
-
 4. La función "f2y" debe llamar a la función 'f2x'
 
 ¿ Ha dado algún error?
-
-En archivo y - 
-    from a.x import f1x
-ModuleNotFoundError: No module named 'a'
-
-RESUELTO EN ARCHIVO Y
 
 5. La función "f2x" debe llamar a la función 'f2z'
 
 ¿ Ha dado algún error?
 
-No, todo OK
 
 -------------------------------------------------
 
