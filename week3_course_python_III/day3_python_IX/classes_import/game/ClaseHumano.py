@@ -1,6 +1,6 @@
 import ClaseOrco as o
 
-class Humano():
+class Humano:
 
     def __init__(self, nombre, armadura, nivel, ataque, ojos=2, piernas=2, dientes=32, salud=100):
         self.nombre = nombre
@@ -12,13 +12,29 @@ class Humano():
         self.dientes = dientes
         self.salud = salud
 
-    #def atacar(orco):
-        
-        
+    def atacar(self, orco):
+        x = orco #no consigo que python acepta el parametro para llamar al otro archivo
+        o.karina.salud = o.karina.salud - (self.ataque - o.karina.armadura)
+        print(f'Este Orco {o.karina.nombre} termina con {o.karina.salud} puntos de vida.')
 
-dave = Humano(nombre="dave", armadura=50, nivel=50, ataque=50)
+    def no_vivo(self,):
+        if self.salud <= 0:
+            return True
+        else:
+            return False
+
+    def actualatr(self,):
+        print(f'Nombre: {self.nombre} | dientes: {self.dientes} | salud: {self.salud} | armadura: {self.armadura} | nivel: {self.nivel} | ataque: {self.ataque} | ojos: {self.ojos} | piernas: {self.piernas} |')
+
+daniel = Humano(nombre='daniel', armadura=3, nivel=34, ataque=6)
+
     
-print(o.grufalo.nivel)
+
+
+
+     
+
+
     
     
     
