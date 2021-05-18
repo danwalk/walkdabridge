@@ -24,3 +24,5 @@ def dice_roller(num1=1, num2=7):
 #fhh = users.groupby(['occupation', 'gender']).size().unstack(fill_value=0) ------ group by two columns df
 
 # pd.read_csv('tips.csv', index_col=0) ------ import and use first column as index
+
+# pd.read_csv("data\\cars1.csv") ------ use \\ to move backwards and forwards in file path
