@@ -31,7 +31,7 @@ def pageurlchanger(url, adddays, maxpage): #works up to 9
     else:
         return url.replace(url[-1:], str(page+adddays))
 
-def pageadderurl(url, counter):
+def pageadderurl(url, counter): #https://www.oddsportal.com/basketball/usa/nba/results/#/page/'#
     return url + str(counter)
 
 #pd.options.display.float_format = "{:,.2%}".format ------ modifiy column format, decimal places
