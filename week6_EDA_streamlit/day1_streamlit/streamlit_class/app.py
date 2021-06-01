@@ -12,55 +12,15 @@ path = os.path.dirname(__file__)
 df = None
     
 menu = st.sidebar.selectbox('Menu:',
-            options=["Bienvenida", "Analizador", "Mapa con Globos"])
+            options=["Welcome", "Link to tableau dashboard", "Download json files"])
 
-if menu == 'Bienvenida':
-    st.title("Bienvenidos al Bootcamp, ponte el cinturon que nos VAMOS!")
-    st.write('Esto es facil...para la gente que sabe ;)')
+if menu == 'Welcome':
+    st.title("Welcome to Daniel Walkers EDA!")
+    st.write('This project is to review popular betting patterns and discover the basic errors made by most people when it comes to sports betting')
+    st.write('To see more information and a dashboard containing the information as seen below, go to the link in the side menu.')
+    st.image('./header.png')
 
-if menu == 'Normal Dataframe':
-    features = create_sliders()
-    features_df  = pd.DataFrame([features])
-    st.table(features_df)  
-if menu == "Load Dataframe Columns": 
-    st.write("https://raw.githubusercontent.com/plotly/datasets/master/2014_usa_states.csv")
-    col1, col2 = st.beta_columns([2, 4])
-    slider_csv = st.sidebar.file_uploader("Select CSV", type=['csv'])
-    new_df_path = None
-    df_slider = None
-    df_writed = None
-    with col1: 
-        image = Image.open(path + os.sep + 'img' + os.sep + 'happy.jpg')
-        st.image (image,use_column_width=True)
-        #user_input = st.text_area("label goes here", "Escribe algo")
-        new_df_path = st.text_input('CSV file path or url')
-        if new_df_path:
-            graph_slider_1 = None
-            st.text(str(new_df_path))
-            df_writed = pd.read_csv(str(new_df_path))
-        if type(df_writed) != type(None):
-            for i in range(5): st.write("")
-            st.table(df_writed)
-        if st.button('Show values'):
-            values = None
-            if type(df_writed) == type(pd.DataFrame()):
-                values = get_data_from_df(df_writed)
-            st.write(' Selected  '+ str(values))
-        if type(slider_csv) != type(None):
-            df_slider = load_csv_df(slider_csv)
-            df_writed = None
-        if type(df_slider) != type(None):
-            for i in range(6): st.write("")
-            st.table(df_slider) 
-    with col2: 
-        if type(df_slider) != type(None):
-            df_slider["inds"] = df_slider["inds"].astype(float)
-            df_slider["acidez"] = df_slider["acidez"].astype(float)
-            graph_slider_1 = alt.Chart(df_slider).mark_circle().encode(
-            x='inds', y='acidez', size="acidez", color="id")
-            st.write(graph_slider_1)
-        
-        
+ 
 
 if menu == "Graphs":
     slider_csv_graph = st.sidebar.file_uploader("Select CSV", type=['csv'])

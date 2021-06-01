@@ -9,8 +9,8 @@ app = Flask(__name__)  # __name__ --> __main__
 @app.route("/")  # @ --> esto representa el decorador de la función
 def home():
     """ Default path """
-    #return app.send_static_file('greet.html')
-    return "Por defecto"
+    return app.send_static_file('greet.html')
+    return "Great, this is working!"
 
 @app.route("/greet")
 def greet():
@@ -25,10 +25,10 @@ def create_json():
 @app.route('/give_me_id', methods=['GET'])
 def give_id():
     x = request.args['password']
-    if x == "12345":
+    if x == "8642":
         return request.args
     else:
-        return "No es la contraseña correcta"
+        return "Incorrect password, sorry"
 
 @app.route("/recibe_informacion")
 def recibe_info():
