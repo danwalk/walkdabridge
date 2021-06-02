@@ -7,8 +7,10 @@ from selenium.webdriver.common.keys import Keys
 from datetime import datetime
 from datetime import timedelta
 import time
+import os
+import json
 
-def dateurlchanger(url, adddays, maxdate): # for webscraping, this url has a date at the end, which changes for up to date scores e.g https://masseyratings.com/nba/games?dt=20201222
+def dateurlchanger(url, adddays, maxdate): # for webscraping, this url for scrapping massey has a date at the end, which changes for up to date scores e.g https://masseyratings.com/nba/games?dt=20201222
     dateofpage = url[-8:]
     date_time_obj = datetime.strptime(dateofpage, '%Y%m%d')
     maxd = datetime.strptime(maxdate, '%Y%m%d')
@@ -19,14 +21,17 @@ def dateurlchanger(url, adddays, maxdate): # for webscraping, this url has a dat
         date_time_obj1 = date_time_obj1.strftime('%Y%m%d')
         return url.replace(dateofpage, date_time_obj1)
 
-def getnbafrommassey(urlstart, maxdate=(datetime.today().strftime('%Y%m%d'))): #needs the date to begin from
-    df = pd.read_json("masseyscrap.json")
+def getnbafrommassey(urlstart, maxdate=(datetime.today().strftime('%Y%m%d'))): #needs the date to begin from and to put the url page to begin from, e.g = https://masseyratings.com/nba/games?dt=20210601
+    SEP = os.sep
+    dir = os.path.dirname
+    json_fullpath = (os.getcwd()) + SEP + "EDA" + SEP + "data" + SEP + "masseyscrap.json"
+    df = pd.read_json(json_fullpath)
     dicc = df.to_dict('series') 
     massey = 0
     url = urlstart
     while massey == 0:
         time.sleep(5) # i tried reducing the time but causes problems when scrapping
-        chrome_driver_path = 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\90.0.4430.212\\chromedriver.exe'
+        chrome_driver_path = 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\90.0.4430.212\\chromedriver.exe' # havent been able to place driver in project 
         options = webdriver.ChromeOptions()
         driver = webdriver.Chrome(executable_path = chrome_driver_path, options = options)
         url = dateurlchanger(url, 1, maxdate)
@@ -65,19 +70,23 @@ def getnbafrommassey(urlstart, maxdate=(datetime.today().strftime('%Y%m%d'))): #
                 dicc[gameid] = gamedicc
             driver.close()
             time.sleep(5)
-            with open('masseyscrap.json', 'w') as fp:
+            with open(json_fullpath, 'w') as fp:
                 json.dump(dicc, fp, indent=4)
             print("This date has been uploaded to json file: ", url[-8:])
         return "Finished"
 
 
-def pageadderurl(url, counter): #this funcion is for adding a page onto a the end of a url eg https://www.oddsportal.com/basketball/usa/nba/results/#/page/
+def pageadderurl(url, counter): #this funcion is for adding/changing the page in the below func, onto a the end of the url eg https://www.oddsportal.com/basketball/usa/nba/results/#/page/
     return url + str(counter)
 
 
-def getnbafromoddsportal(numberofpages): #for example up to page 22
+def getnbafromoddsportal(numberofpages): #for example, for the whole dataset, up to page 22
+    SEP = os.sep
+    dir = os.path.dirname    
     count=1
-    dicttotal = {}
+    json_fullpath = dir((os.getcwd())) + SEP + "data" + SEP + "oddsnba.json"
+    with open(json_fullpath) as json_file:
+        dicttotal = json.load(json_file)
     while count < numberofpages:
         url = 'https://www.oddsportal.com/basketball/usa/nba/results/#/page/'
         chrome_driver_path = 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\90.0.4430.212\\chromedriver.exe'
@@ -100,7 +109,7 @@ def getnbafromoddsportal(numberofpages): #for example up to page 22
             time.sleep(2)
             driver.close()
             time.sleep(1)
-            with open('oddsnba.json', 'w') as fp:
+            with open(json_fullpath, 'w') as fp:
                 json.dump(dicttotal, fp, indent=4)
             count +=1
             print(f'Page {count} loaded to json ok')

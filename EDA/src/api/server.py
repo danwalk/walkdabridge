@@ -1,9 +1,11 @@
 from flask import Flask, request, render_template
-from EDA.src.utils.functions import read_json
+from functions import read_json
 import os
 import argparse
 import pandas as pd
 from flask import Response
+
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-x", type=int, help="the password")
