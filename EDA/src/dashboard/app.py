@@ -16,7 +16,7 @@ menu = st.sidebar.selectbox('Menu:',
             options=["Welcome", "Link to tableau dashboard", "Download json files"])
 
 if menu == 'Welcome':
-    st.title("Welcome to Daniel Walkers EDA!")
+    st.title("THE HOUSE ALWAYS WINS...most of the time!")
     st.write('This project is to review popular betting patterns and discover the basic errors made by most people when it comes to sports betting')
     st.write('To interact with the data, please go to the link in the side menu.')
 

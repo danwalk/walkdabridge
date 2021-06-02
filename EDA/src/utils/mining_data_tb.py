@@ -19,9 +19,9 @@ def dateurlchanger(url, adddays, maxdate): # for webscraping, this url has a dat
         date_time_obj1 = date_time_obj1.strftime('%Y%m%d')
         return url.replace(dateofpage, date_time_obj1)
 
-
-
-def getnbafrommassey(urlstart, maxdate=(datetime.today().strftime('%Y%m%d')): #needs the date to begin from
+def getnbafrommassey(urlstart, maxdate=(datetime.today().strftime('%Y%m%d'))): #needs the date to begin from
+    df = pd.read_json("masseyscrap.json")
+    dicc = df.to_dict('series') 
     massey = 0
     url = urlstart
     while massey == 0:
@@ -29,7 +29,7 @@ def getnbafrommassey(urlstart, maxdate=(datetime.today().strftime('%Y%m%d')): #n
         chrome_driver_path = 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\90.0.4430.212\\chromedriver.exe'
         options = webdriver.ChromeOptions()
         driver = webdriver.Chrome(executable_path = chrome_driver_path, options = options)
-        url = pageurlchanger(url, 1, maxdate)
+        url = dateurlchanger(url, 1, maxdate)
         if url == 'UP TO DATE':
             massey +=1
             print("UP TO DATE")
